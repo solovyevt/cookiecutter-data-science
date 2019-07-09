@@ -23,7 +23,9 @@ lint:
 create_environment:
 	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
 	@bash -c "git init"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]; dvc init; dvc config --system core.analytics false"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]; dvc init"
+	@bash -c "echo '[core]' >> $(PROJECT_DIR)/.dvc/config"
+	@bash -c "echo 'analytics = false' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install"
 	@bash -c "echo 'CWD=$(PROJECT_DIR)' >> $(PROJECT_DIR)/.env"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
