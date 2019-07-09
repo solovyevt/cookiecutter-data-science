@@ -1,19 +1,22 @@
-# Cookiecutter Data Science (Tweaked by vasinkd)
+# Cookiecutter Data Science (Tweaked by @vasinkd)
 
 _A logical, reasonably standardized, but flexible project structure for doing and sharing data science work._
 
 Cookiecutter Data Science is a real game changer for data science projects.
 I made several tweaks on base of drivendata template which helps me to improve my working routine.
 
-HOW TO USE:
+__HOW TO USE:__
+
 First of all, install cookiecutter
 ```bash
 $ pip install cookiecutter
 ```
 After that you can use template with:
-cookiecutter https://github.com/vasinkd/cookiecutter-data-science
+```bash
+$ cookiecutter https://github.com/vasinkd/cookiecutter-data-science
+```
 
-Changes:
+__Changes:__
 - Differenciates b/w python3.5, python3.6, python3.7, not python2/python3
 - Creation of virtual envronment is limited to virtualenv.
 - Creation of virtual envronment also sets up git vcs and dvc vcs and pre-commit hooks
@@ -82,17 +85,3 @@ The directory structure of your new project looks like this:
     └── visualization  <- Scripts to create exploratory and results oriented visualizations
         └── visualize.py
 ```
-
-## Contributing
-
-We welcome contributions! [See the docs for guidelines](https://drivendata.github.io/cookiecutter-data-science/#contributing).
-
-### Installing development requirements
-------------
-
-    pip install -r requirements.txt
-
-### Running the tests
-------------
-
-    py.test tests
