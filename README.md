@@ -24,8 +24,8 @@ __Changes:__
 - Added pipeline folder to store all dvc pipelines there
 - Added data/features folder
 - Added settings.py to illustrate how to use .env file
-- Added an empty noteboook "01 - DVC Pipelines.ipynb" to store all dvc pipelines creation commands and to illustrate that numeration of notebooks is a good idea
-- Cleared meke_dataset.py since I find it too restrictive and confusing
+- Added an empty noteboook "1.0-{{cookiecutter.author_name}}-dvc-pipeline.ipynb" to store all dvc pipelines creation commands and to illustrate that numeration of notebooks is a good idea
+- Cleared make_dataset.py since I find it too restrictive and confusing
 - Removed aws sync functions
 - Removed data folder from .gitignore since dvc version control takes care of .gitignore
 - Removed tox.ini since .pre-commit.yaml is enough for me
