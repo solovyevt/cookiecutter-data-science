@@ -19,16 +19,26 @@ clean:
 lint:
 	flake8 src
 
-## Set up python interpreter environment, version control and pre-commit hooks
-create_environment:
+## Initial set up of python interpreter environment, version control and pre-commit hooks
+initial_setup:
 	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
 	@bash -c "git init"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]; dvc init"
 	@bash -c "echo '[core]' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "echo 'analytics = false' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install; pre-commit autoupdate"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/.requirements.txt"
 	@bash -c "echo 'CWD=$(PROJECT_DIR)' >> $(PROJECT_DIR)/.env"
 	@bash -c "git add . ; git commit -am 'INITIAL COMMIT'"
+	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
+	@echo ">>> git and dvc are ready to go"
+
+## Following set up of python interpreter environment, version control and pre-commit hooks
+following_setup:
+	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/.requirements.txt"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
 	@echo ">>> git and dvc are ready to go"
 
