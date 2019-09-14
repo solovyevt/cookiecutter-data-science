@@ -27,7 +27,7 @@ initial_setup:
 	@bash -c "echo '[core]' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "echo 'analytics = false' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install; pre-commit autoupdate"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/requirements.txt"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 	@bash -c "echo 'CWD=$(PROJECT_DIR)' >> $(PROJECT_DIR)/.env"
 	@bash -c "git add . ; git commit -am 'INITIAL COMMIT'"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
@@ -41,6 +41,9 @@ following_setup:
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
 	@echo ">>> git and dvc are ready to go"
+
+requirements:
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 
 commit:
 	$(eval EXP_FILE := "$(PROJECT_DIR)/src/study_name.txt")
