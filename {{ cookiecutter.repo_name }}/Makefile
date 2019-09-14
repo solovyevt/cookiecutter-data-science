@@ -38,7 +38,7 @@ following_setup:
 	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/requirements.txt"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
 	@echo ">>> git and dvc are ready to go"
 
