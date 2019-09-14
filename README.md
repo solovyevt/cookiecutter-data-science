@@ -7,9 +7,13 @@ I made several tweaks on base of drivendata template which helps me to improve m
 
 __HOW TO USE:__
 
-First of all, install cookiecutter
+First of all, install cookiecutter with:
 ```bash
 $ pip install cookiecutter
+```
+or
+```bash
+$ sudo apt install cookiecutter
 ```
 After that you can use template with:
 ```bash
