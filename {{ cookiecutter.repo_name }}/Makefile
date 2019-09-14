@@ -27,7 +27,7 @@ initial_setup:
 	@bash -c "echo '[core]' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "echo 'analytics = false' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install; pre-commit autoupdate"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/.requirements.txt"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/requirements.txt"
 	@bash -c "echo 'CWD=$(PROJECT_DIR)' >> $(PROJECT_DIR)/.env"
 	@bash -c "git add . ; git commit -am 'INITIAL COMMIT'"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
@@ -38,9 +38,18 @@ following_setup:
 	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]"
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/.requirements.txt"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install $(PROJECT_DIR)/requirements.txt"
 	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
 	@echo ">>> git and dvc are ready to go"
+
+commit:
+	$(eval EXP_FILE := "$(PROJECT_DIR)/src/study_name.txt")
+	$(eval EXP_NAME := $(shell cat ${EXP_FILE}))
+	@bash -c "git commit -am \"completed experiment $(EXP_NAME)\"; git tag -a $(EXP_NAME) -m \"$(EXP_NAME)\""
+
+push:
+	@bash -c "git push origin --follow-tags"
+	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; dvc push"
 
 #################################################################################
 # PROJECT RULES                                                                 #
