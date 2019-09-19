@@ -68,12 +68,12 @@ The directory structure of your new project looks like this:
 ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
 │                         generated with `pip freeze > requirements.txt`
 │
-├── settings.py <- illustrates how to use .env file
-│
 ├── __init__.py
 │
 └── {{cookiecutter.repo_name}}                <- Source code for use in this project.
     ├── __init__.py    <- Makes {{cookiecutter.repo_name}} a Python module
+    │    
+    ├── settings.py <- illustrates how to use .env file
     │
     ├── data           <- Scripts to download or generate data
     │   └── make_dataset.py
