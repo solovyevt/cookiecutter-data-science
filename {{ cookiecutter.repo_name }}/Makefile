@@ -45,6 +45,9 @@ following_setup:
 requirements:
 	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 
+environment:
+	@echo ">>> Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
+
 commit:
 	$(eval EXP_FILE := "$(PROJECT_DIR)/src/study_name.txt")
 	$(eval EXP_NAME := $(shell cat ${EXP_FILE}))
