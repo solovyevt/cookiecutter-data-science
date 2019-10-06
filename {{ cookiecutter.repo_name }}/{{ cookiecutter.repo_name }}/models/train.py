@@ -50,7 +50,8 @@ if __name__ == "__main__":
     data_hash = str_hash(file_hash(X_file) + file_hash(y_file))
 
     config = read_config(config_file)
-    study_name = str_hash(data_hash + config.get('objective_name'))
+    objective_name = config.get('algo_name')
+    study_name = str_hash(data_hash + objective_name)
 
     X = read_inp_file(X_file)
     y = read_inp_file(y_file)
@@ -66,6 +67,7 @@ if __name__ == "__main__":
 
     study.set_user_attr("data_description", data_descr)
     study.set_user_attr("data_hash", data_hash)
+    study.set_user_attr("algo_name", objective_name)
 
     try:
         study.optimize(objective, n_trials=config.get('n_trials'))
@@ -82,4 +84,5 @@ if __name__ == "__main__":
 
     predictor = create_predictor()
     write_output(predictor, predictor_file)
-    measure_inference_time(predictor)
+    inf_time = measure_inference_time(predictor)
+    study.set_user_attr("inference_time", inf_time)
