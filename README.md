@@ -48,6 +48,7 @@ The directory structure of your new project looks like this:
 │   ├── interim        <- Intermediate data that has been transformed.
 │   ├── processed      <- The final, canonical data sets for modeling.
 │   ├── features       <- Features may be stored here
+│   ├── inference      <- Inference stages may be stored here
 │   └── raw            <- The original, immutable data dump.
 │
 ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
@@ -70,7 +71,7 @@ The directory structure of your new project looks like this:
 │
 ├── __init__.py
 │
-└── {{cookiecutter.repo_name}}                <- Source code for use in this project.
+└── <project_name>     <- Source code for use in this project.
     ├── __init__.py    <- Makes {{cookiecutter.repo_name}} a Python module
     │    
     ├── settings.py <- illustrates how to use .env file
@@ -79,13 +80,9 @@ The directory structure of your new project looks like this:
     │   └── make_dataset.py
     │
     ├── features       <- Scripts to turn raw data into features for modeling
-    │   └── build_features.py
+    │   └── featurize.py
     │
-    ├── models         <- Scripts to train models and then use trained models to make
-    │   │                 predictions
-    │   ├── predict_model.py
-    │   └── train_model.py
-    │
-    └── visualization  <- Scripts to create exploratory and results oriented visualizations
-        └── visualize.py
+    └── models         <- Scripts to train models and then use trained models to make
+        │                 predictions
+        └── train.py
 ```
