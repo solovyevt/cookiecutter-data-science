@@ -1,7 +1,7 @@
 import optuna
-from {{cookiecutter.repo_name}}.utils import check_args_num \
-    read_config, set_random_seed
-from {{cookiecutter.repo_name}}.settings import cwd, optuna_db_path
+from {{cookiecutter.repo_name}}.utils import check_args_num, \
+    read_config, set_random_seed, str_hash, file_hash
+from {{cookiecutter.repo_name}}.settings import optuna_db_path
 
 
 def read_inp_file(filepath):
@@ -79,7 +79,7 @@ if __name__ == "__main__":
 
     if (study.best_value is not None) and (objective.best_result is not None) \
             and ((objective.best_result - study.best_value)
-                 < params['metric_precision']):
+                 < config['metric_precision']):
         write_output(objective.best_model, best_model_path)
 
     predictor = create_predictor()
