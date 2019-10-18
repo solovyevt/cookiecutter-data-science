@@ -35,7 +35,7 @@ def check_args_num(n_args, strict=True):
     return sys.argv
 
 
-def set_random_seed(seed):
+def set_random_seed(seed=None):
     raise NotImplementedError
 
 
