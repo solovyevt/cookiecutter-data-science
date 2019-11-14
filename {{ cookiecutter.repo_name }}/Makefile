@@ -50,7 +50,7 @@ environment:
 	@echo ">>> Activate with:\nsource $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate"
 
 commit:
-	$(eval EXP_FILE := "$(PROJECT_DIR)/src/study_name.txt")
+	$(eval EXP_FILE := "$(PROJECT_DIR)/$(PROJECT_NAME)/study_name.txt")
 	$(eval EXP_NAME := $(shell cat ${EXP_FILE}))
 	@bash -c "git commit -am \"completed experiment $(EXP_NAME)\"; git tag -a $(EXP_NAME) -m \"$(EXP_NAME)\""
 
