@@ -5,6 +5,7 @@
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 PROJECT_NAME = {{ cookiecutter.repo_name }}
 PYTHON_INTERPRETER = {{ cookiecutter.python_interpreter }}
+VENV_FOLDER = {{ cookiecutter.venv_folder_name }}
 
 #################################################################################
 # COMMANDS                                                                      #
@@ -21,32 +22,32 @@ lint:
 
 ## Initial set up of python interpreter environment, version control and pre-commit hooks
 initial_setup:
-	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
+	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)"
 	@bash -c "git init"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]; dvc init"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install dvc[all]; dvc init"
 	@bash -c "echo '[core]' >> $(PROJECT_DIR)/.dvc/config"
 	@bash -c "echo 'analytics = false' >> $(PROJECT_DIR)/.dvc/config"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install; pre-commit autoupdate"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install; pre-commit autoupdate"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 	@bash -c "echo 'CWD=$(PROJECT_DIR)' >> $(PROJECT_DIR)/.env"
 	@bash -c "git add . ; git commit -am 'INITIAL COMMIT'"
-	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
+	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate"
 	@echo ">>> git and dvc are ready to go"
 
 ## Following set up of python interpreter environment, version control and pre-commit hooks
 following_setup:
-	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/envs/$(PROJECT_NAME)"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install dvc[all]"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
-	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
+	@bash -c "virtualenv -p $(PYTHON_INTERPRETER) $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install dvc[all]"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install pre-commit; pre-commit install"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
+	@echo ">>> New virtualenv created. Activate with:\nsource $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate"
 	@echo ">>> git and dvc are ready to go"
 
 requirements:
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; pip install -r $(PROJECT_DIR)/requirements.txt"
 
 environment:
-	@echo ">>> Activate with:\nsource $(HOME)/envs/$(PROJECT_NAME)/bin/activate"
+	@echo ">>> Activate with:\nsource $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate"
 
 commit:
 	$(eval EXP_FILE := "$(PROJECT_DIR)/src/study_name.txt")
@@ -55,7 +56,7 @@ commit:
 
 push:
 	@bash -c "git push origin --follow-tags"
-	@bash -c "source $(HOME)/envs/$(PROJECT_NAME)/bin/activate; dvc push"
+	@bash -c "source $(HOME)/$(VENV_FOLDER)/$(PROJECT_NAME)/bin/activate; dvc push"
 
 #################################################################################
 # PROJECT RULES                                                                 #
